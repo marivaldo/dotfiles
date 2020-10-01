@@ -1,0 +1,34 @@
+" Color scheme
+if filereadable(expand("$HOME/.vim/plugged/oceanic-next/colors/OceanicNext.vim"))
+  syntax enable
+  " for vim 7
+  set t_Co=256
+
+
+  " for vim 8
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+
+  let g:oceanic_next_terminal_bold = 1
+  let g:oceanic_next_terminal_italic = 1
+
+  colorscheme OceanicNext
+endif
+
+" Main configurations
+set nocompatible
+
+set colorcolumn=120
+
+let g:indentLine_enabled = 0
+
+set undodir=~/.vim/undodir
+set nobackup
+set noswapfile " Don't create swap file
+set nowritebackup
+set autoread " Load file when change
+set guioptions-=r " Removes right hand scroll bar
+set clipboard+=unnamed
+set mouse=a
+set ttymouse=xterm2
