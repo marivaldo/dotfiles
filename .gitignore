@@ -12,8 +12,7 @@ fish/fish_variables
 fish/fishd.*
 
 # Sensitive data
-git/gitconfig          # Personal gitconfig with sensitive data
 git/gitconfig.local
-ssh/config             # SSH config with server IPs
-*_local
+ssh/config
+fish/config.local.fish
 *.backup
