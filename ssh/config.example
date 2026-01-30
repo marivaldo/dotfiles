@@ -1,0 +1,17 @@
+# Exemplo de configuração SSH
+# Copie para config e ajuste conforme necessário
+
+Host exemplo
+  HostName 192.168.1.100
+  User deploy
+  Port 22
+
+Host github-pessoal
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_pessoal
+
+Host github-trabalho
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_trabalho

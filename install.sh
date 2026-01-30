@@ -11,6 +11,7 @@ MAPPINGS=(
   "nvim:$HOME/.config/nvim"
   "git/gitconfig:$HOME/.gitconfig"
   "vim/vimrc:$HOME/.vimrc"
+  "ssh/config:$HOME/.ssh/config"
 )
 
 for mapping in "${MAPPINGS[@]}"; do
