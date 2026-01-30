@@ -5,6 +5,7 @@ My personal development environment configuration files.
 ## 📦 What's included
 
 - **Fish Shell**: Modern shell configuration with aliases and completions
+- **Starship**: Fast, customizable prompt with git, kubernetes, gcloud info
 - **Neovim (LazyVim)**: Text editor configuration with custom LSP setup for Ruby
 - **Vim**: Classic vim configuration
 - **Git**: Git configuration and aliases
@@ -59,11 +60,12 @@ touch fish/config.local.fish
 ### Symlinks Created
 
 ```
-~/.config/fish  → dotfiles/fish
-~/.config/nvim  → dotfiles/nvim
-~/.gitconfig    → dotfiles/git/gitconfig
-~/.vimrc        → dotfiles/vim/vimrc
-~/.ssh/config   → dotfiles/ssh/config
+~/.config/fish         → dotfiles/fish
+~/.config/nvim         → dotfiles/nvim
+~/.config/starship.toml → dotfiles/starship.toml
+~/.gitconfig           → dotfiles/git/gitconfig
+~/.vimrc               → dotfiles/vim/vimrc
+~/.ssh/config          → dotfiles/ssh/config
 ```
 
 ## 📁 Structure
@@ -73,6 +75,7 @@ dotfiles/
 ├── README.md               # This file
 ├── install.sh              # Symlink installer
 ├── Brewfile                # Homebrew packages
+├── starship.toml           # Starship prompt config
 ├── fish/                   # Fish shell configuration
 │   ├── config.fish         # Main config file
 │   ├── config.local.fish   # Local secrets (gitignored)
@@ -99,6 +102,15 @@ dotfiles/
 - Integration with mise for version management
 - FZF integration for fuzzy search
 - Secrets stored in `config.local.fish` (gitignored)
+
+### Starship Prompt
+- Git branch and status
+- Kubernetes context and namespace
+- GCP project
+- Terraform workspace
+- Docker context
+- Ruby/Node/Python versions (when in project)
+- Command duration (if > 2s)
 
 ### Neovim
 - **LazyVim** distribution with custom configurations
