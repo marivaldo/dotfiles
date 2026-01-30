@@ -12,6 +12,7 @@ MAPPINGS=(
   "git/gitconfig:$HOME/.gitconfig"
   "vim/vimrc:$HOME/.vimrc"
   "ssh/config:$HOME/.ssh/config"
+  "starship.toml:$HOME/.config/starship.toml"
 )
 
 for mapping in "${MAPPINGS[@]}"; do

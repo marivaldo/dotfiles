@@ -33,3 +33,6 @@ set --export PATH $QLTY_INSTALL/bin $PATH
 
 set -x TERM xterm-256color
 fish_add_path $HOME/.local/bin
+
+# Starship prompt
+starship init fish | source
