@@ -5,3 +5,6 @@
 vim.g.mapleader = ","
 
 vim.opt.relativenumber = false
+
+-- Show default intro screen
+vim.opt.shortmess:remove("I")
