@@ -1,4 +1,4 @@
-# Cria layout de desenvolvimento no Kitty
+# Creates a dev layout in Kitty
 # +------------------+--------+
 # |                  |   top  |
 # |                  +--------+
@@ -8,17 +8,23 @@
 # +------------------+--------+
 
 function dev_layout
-    # Cria 3 janelas extras
-    kitty @ launch --cwd=current
-    kitty @ launch --cwd=current
-    kitty @ launch --cwd=current
+    # Set your project path here
+    set project_dir ~/Projects/your-project
 
-    # Usa layout tall: 1 grande na esquerda, resto empilhado na direita
+    # Create 3 extra windows in the project folder
+    kitty @ launch --cwd=$project_dir
+    kitty @ launch --cwd=$project_dir
+    kitty @ launch --cwd=$project_dir
+
+    # Use tall layout: 1 large on the left (70%), rest stacked on the right
     kitty @ goto-layout tall
 
-    # Foca na primeira janela (painel principal)
+    # Focus on the first window (main panel)
     kitty @ focus-window --match num:0
 
-    # Redimensiona o painel principal para 70%
+    # Resize main panel to 70%
     kitty @ resize-window --increment 50
+
+    # Navigate main panel to project
+    cd $project_dir
 end

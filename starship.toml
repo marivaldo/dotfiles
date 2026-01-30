@@ -4,7 +4,7 @@
 # Timeout for commands (ms)
 command_timeout = 1000
 
-# Format do prompt
+# Prompt format
 format = """
 $kubernetes\
 $gcloud\
