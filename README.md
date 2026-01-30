@@ -126,10 +126,6 @@ Files matching `*_local` and `ssh/config` are gitignored for sensitive data:
 | `fish/config.local.fish` | API keys, tokens, passwords |
 | `ssh/config` | Server IPs, hostnames, users |
 
-## 🔧 Customization
-
-Feel free to fork and customize these dotfiles to your needs. The configs are well-documented and modular.
-
 ## 📝 Notes
 
 - The Neovim config includes a custom Ruby LSP wrapper to fix version mismatch errors
