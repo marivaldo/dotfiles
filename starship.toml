@@ -63,12 +63,10 @@ style = "red"
 symbol = "⎈ "
 style = "cyan"
 disabled = false
-format = '[$symbol$context( \($namespace\))]($style) '
+format = '[$symbol$context]($style) '
 
 [gcloud]
-symbol = "☁️ "
-style = "blue"
-format = '[$symbol$project]($style) '
+disabled = true
 
 [terraform]
 symbol = "💠 "
