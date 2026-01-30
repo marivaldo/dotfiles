@@ -1,0 +1,251 @@
+call plug#begin('~/.vim/plugged')
+
+Plug 'rking/ag.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vwxyutarooo/nerdtree-devicons-syntax'
+Plug 'itchyny/lightline.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'ap/vim-css-color'
+Plug 'godlygeek/tabular'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'vim-ruby/vim-ruby'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'github/copilot.vim'
+Plug 'wakatime/vim-wakatime'
+
+call plug#end()
+
+if filereadable(expand("$HOME/.vim/plugged/oceanic-next/colors/OceanicNext.vim"))
+ syntax enable
+ set termguicolors
+ let g:oceanic_next_terminal_bold = 1
+ let g:oceanic_next_terminal_italic = 1
+ colorscheme OceanicNext
+endif
+
+" Main configurations
+set nocompatible
+set path+=**
+set colorcolumn=120
+set noautochdir
+set hidden
+set wrap        " wrap lines
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set tabpagemax=20
+set showtabline=2
+set smarttab
+set smartindent
+set expandtab
+set backspace=indent,eol,start
+                  " allow backspacing over everything in insert mode
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
+set number        " always show line numbers
+set numberwidth=5
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set showmatch     " set show matching parenthesis
+set ignorecase    " ignore case when searching
+set smartcase     " ignore case if search pattern is all lowercase,
+                  "    case-sensitive otherwise
+set smarttab      " insert tabs on the start of a line according to
+                  "    shiftwidth, not tabstop
+set hlsearch    " highlight search terms
+set incsearch     " show search matches as you type
+set title
+set visualbell           " don't beep
+set noerrorbells         " don't beep
+set history=1000         " remember more commands and search history
+set undolevels=1000      " use many levels of undo
+set undofile  "Maintain undo history between sessions
+set undodir=~/.vim/undodir
+set nobackup
+set noswapfile " Don't create swap file
+set nowritebackup
+set autoread " Load file when change
+set guioptions-=r " Removes right hand scroll bar
+set clipboard^=unnamed,unnamedplus
+set mouse=a
+set wildmenu "Better popup menu
+set confirm "Dialog to ask when closing unsave changes
+set nofoldenable " disable folding
+set redrawtime=10000
+
+"Disable sounds and screen flashing
+set visualbell
+set t_vb=
+
+"May be improve the speed
+set lazyredraw
+set ttyfast
+
+" Wildignore
+set wildignore+=*.o,*.obj,system*,*.svg,*.ttf,*.eot,*.jpg,*.png,*.gif,*.log,tmp,yard_templates,coverage
+set list listchars=tab:»·,trail:·
+
+" Encoding
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+
+" Leader key
+let mapleader=","
+
+" Nohl
+nmap <c-h> :nohl<cr>
+
+" lightline Configurations
+set laststatus=2
+set noshowmode
+let g:lightline = {
+    \ 'active': {
+    \   'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified']]
+    \ }}
+
+" FZF Configurations
+if executable('fzf')
+  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+  " <C-p>to search files
+  " nnoremap <silent> <C-p> :Files<cr>
+  nnoremap <silent> <expr> <C-p> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Files\<cr>"
+
+  " <M-p> for open buffers
+  nnoremap <silent> <Leader>b :Buffers<cr>
+
+  " Better search history
+  command! QHist call fzf#vim#search_history({'right': '40'})
+  nnoremap q/ :QHist<CR>
+
+  " Enable per-command history.
+  " CTRL-N and CTRL-P will be automatically bound to next-history and
+  " previous-history instead of down and up. If you don't like the change,
+  " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+  let g:fzf_history_dir = '~/.vim/share/fzf'
+
+  " Layouy
+  let g:fzf_layout = { 'down': '~40%' }
+
+  " Customize fzf colors to match your color scheme
+  let g:fzf_colors =
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+end
+
+" NerdTree Configurations
+let NERDTreeIgnore=['\.swp$']
+silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
+silent! nmap <silent> <Leader>r :NERDTreeFind<CR>
+let g:NERDTreeWinSize = 30
+let g:NERDTreeShowHidden = 1
+
+" Nerdtree syntax highlight
+let s:colors = {
+  \ 'brown'       : "905532",
+  \ 'aqua'        : "3AFFDB",
+  \ 'blue'        : "689FB6",
+  \ 'darkBlue'    : "44788E",
+  \ 'purple'      : "834F79",
+  \ 'lightPurple' : "834F79",
+  \ 'red'         : "AE403F",
+  \ 'beige'       : "F5C06F",
+  \ 'yellow'      : "F09F17",
+  \ 'orange'      : "D4843E",
+  \ 'darkOrange'  : "F16529",
+  \ 'pink'        : "CB6F6F",
+  \ 'salmon'      : "EE6E73",
+  \ 'green'       : "8FAA54",
+  \ 'lightGreen'  : "31B53E",
+  \ 'white'       : "FFFFFF"
+\ }
+
+function! RepositoryCopyLineUrl()
+  let line1 = a:firstline
+  let line2 = a:lastline
+  let commit = substitute(system('git rev-parse HEAD'), '[\]\|[[:cntrl:]]', '', 'g')
+  let cmd = 'git ls-remote --get-url | sed "s/:/\//g" | sed "s/git@/https:\/\//g" | sed "s/\.git/\/blob\//g"'
+  let result = substitute(system(cmd), '[\]\|[[:cntrl:]]', '', 'g')
+
+  if line1 != line2
+    let lines = '#L' . line1 . '-' . line2
+  else
+    let lines = '#L' . line1
+  endif
+
+  let @+=(result . commit . '/' . expand("%") . lines)
+endfunction
+
+nmap <Leader>cs :let @+=expand("%")<CR>
+nmap <Leader>cl :let @+=expand("%:p")<CR>
+nmap <Leader>cr :let @+=('bin/rspec ' . expand("%") . ':' . line("."))<CR>
+nmap <Leader>dr :let @+=('docker/rspec ' . expand("%") . ':' . line("."))<CR>
+nmap <Leader>cg :call RepositoryCopyLineUrl()<CR>
+vnoremap <Leader>cg :call RepositoryCopyLineUrl()<CR>
+
+" Alias to save and quit
+command WQ wq
+command Wq wq
+command W w
+command Q q
+command QA qa
+command Qa qa
+
+" Set FileTypes
+nmap <Leader>ftr :set ft=ruby<CR>
+
+" Remove trailing whitespace
+au BufWritePre * :%s/\s\+$//e
+
+" AG Configurations
+if executable('ag')
+  " Use Ag over Grep
+  let g:ag_prg="ag --vimgrep --path-to-ignore ~/.gitignore"
+endif
+
+" bind K to grep word under cursor
+nnoremap F :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap \ :Ag<SPACE>
+
+" Move visual selection
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+
+" ultisnips Configurations
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+" autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+" autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+com! FormatJSON %!python -m json.tool
