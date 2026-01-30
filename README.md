@@ -81,10 +81,13 @@ dotfiles/
 ├── fish/                   # Fish shell configuration
 │   ├── config.fish         # Main config file
 │   ├── config.local.fish   # Local secrets (gitignored)
+│   ├── conf.d/             # Auto-loaded configs (fzf, omf, etc)
 │   ├── functions/          # Custom functions (dev_layout, etc)
-│   └── completions/        # Shell completions
+│   ├── completions/        # Shell completions
+│   └── fish_plugins        # Fisher plugin list
 ├── kitty/                  # Kitty terminal configuration
-│   └── kitty.conf          # Main config with remote control enabled
+│   ├── kitty.conf          # Main config with remote control enabled
+│   └── current-theme.conf  # Color theme
 ├── nvim/                   # Neovim configuration (LazyVim)
 │   ├── lua/
 │   │   └── plugins/        # Custom plugin configurations
@@ -107,6 +110,7 @@ dotfiles/
 - FZF integration for fuzzy search
 - Secrets stored in `config.local.fish` (gitignored)
 - `dev_layout` function for Kitty dev environment
+- Kubernetes aliases: `k`, `kgp`, `kgs`, `kgd`, `klogs`, `kctx`, `kns`
 
 ### Kitty Terminal
 - GPU-accelerated terminal emulator

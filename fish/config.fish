@@ -13,6 +13,15 @@ alias cl='clear'
 alias vim='nvim'
 alias vi='command vim'
 
+# Kubernetes
+alias k='kubectl'
+alias kgp='kubectl get pods'
+alias kgs='kubectl get services'
+alias kgd='kubectl get deployments'
+alias klogs='kubectl logs -f'
+alias kctx='kubectx'
+alias kns='kubens'
+
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
