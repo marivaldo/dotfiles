@@ -16,6 +16,10 @@ return {
     views = {
       split = {
         enter = true,
+        size = "auto",
+        win_options = {
+          wrap = true,
+        },
       },
     },
   },
