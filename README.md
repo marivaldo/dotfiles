@@ -4,14 +4,25 @@ My personal development environment configuration files.
 
 ## 📦 What's included
 
+- **Fish Shell**: Modern shell configuration with aliases and completions
 - **Neovim (LazyVim)**: Text editor configuration with custom LSP setup for Ruby
-- **Fish Shell**: Modern shell configuration
+- **Vim**: Classic vim configuration
 - **Git**: Git configuration and aliases
+- **SSH**: SSH config example
+- **Brewfile**: All Homebrew packages for quick setup
 
 ## 🚀 Quick Start
 
+```bash
+git clone git@github.com:marivaldo/dotfiles.git ~/Projects/own/dotfiles
+cd ~/Projects/own/dotfiles
+./install.sh
+brew bundle install
+```
+
 ### Prerequisites
 
+- [Homebrew](https://brew.sh/)
 - [Neovim](https://neovim.io/) (>= 0.9.0)
 - [Fish Shell](https://fishshell.com/)
 - [Git](https://git-scm.com/)
@@ -21,27 +32,38 @@ My personal development environment configuration files.
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/dotfiles
+git clone git@github.com:marivaldo/dotfiles.git ~/Projects/own/dotfiles
 ```
 
-2. Backup your existing configs:
+2. Run the installer (creates symlinks):
 ```bash
-mv ~/.config/nvim ~/.config/nvim.backup
-mv ~/.config/fish ~/.config/fish.backup
-mv ~/.gitconfig ~/.gitconfig.backup
+./install.sh
+```
+Note: If configs already exist, remove them manually first or backup.
+
+3. Install all Homebrew packages:
+```bash
+brew bundle install
 ```
 
-3. Copy the configs you want:
+4. Copy and edit local configs (not committed):
 ```bash
-# Neovim
-cp -r ~/dotfiles/nvim ~/.config/nvim
+# SSH config
+cp ssh/config.example ssh/config
+# Edit with your servers
 
-# Fish shell
-cp -r ~/dotfiles/fish ~/.config/fish
+# Fish secrets (create with your API keys)
+touch fish/config.local.fish
+```
 
-# Git (copy example and customize with your info)
-cp ~/dotfiles/git/gitconfig.example ~/.gitconfig
-# Edit ~/.gitconfig with your name, email, etc.
+### Symlinks Created
+
+```
+~/.config/fish  → dotfiles/fish
+~/.config/nvim  → dotfiles/nvim
+~/.gitconfig    → dotfiles/git/gitconfig
+~/.vimrc        → dotfiles/vim/vimrc
+~/.ssh/config   → dotfiles/ssh/config
 ```
 
 ## 📁 Structure
@@ -49,19 +71,34 @@ cp ~/dotfiles/git/gitconfig.example ~/.gitconfig
 ```
 dotfiles/
 ├── README.md               # This file
+├── install.sh              # Symlink installer
+├── Brewfile                # Homebrew packages
+├── fish/                   # Fish shell configuration
+│   ├── config.fish         # Main config file
+│   ├── config.local.fish   # Local secrets (gitignored)
+│   ├── functions/          # Custom functions
+│   └── completions/        # Shell completions
 ├── nvim/                   # Neovim configuration (LazyVim)
 │   ├── lua/
 │   │   └── plugins/        # Custom plugin configurations
 │   └── README.md           # Neovim-specific documentation
-├── fish/                   # Fish shell configuration
-│   ├── config.fish         # Main config file
-│   ├── functions/          # Custom functions
-│   └── completions/        # Shell completions
-└── git/                    # Git configuration
-    └── gitconfig.example   # Git config template (customize with your info)
+├── vim/                    # Vim configuration
+│   └── vimrc               # Vim config file
+├── git/                    # Git configuration
+│   ├── gitconfig           # Git config
+│   └── gitconfig.example   # Git config template
+└── ssh/                    # SSH configuration
+    ├── config              # SSH config (gitignored)
+    └── config.example      # SSH config template
 ```
 
 ## ✨ Highlights
+
+### Fish Shell
+- Custom functions and aliases
+- Integration with mise for version management
+- FZF integration for fuzzy search
+- Secrets stored in `config.local.fish` (gitignored)
 
 ### Neovim
 - **LazyVim** distribution with custom configurations
@@ -70,15 +107,24 @@ dotfiles/
 
 See [nvim/README.md](./nvim/README.md) for detailed Neovim documentation.
 
-### Fish Shell
-- Custom functions and aliases
-- Integration with mise for version management
-
 ### Git
 - Useful aliases (ci, st, br, co, lg, hist)
 - Colorful output
-- Custom configurations for better workflows
-- **Note:** Use `gitconfig.example` as template - update with your personal information
+- SSH signing for commits
+
+### Brewfile
+- All CLI tools and apps in one file
+- Update with: `brew bundle dump --file=Brewfile --force`
+- Install with: `brew bundle install`
+
+## 🔒 Local Configs (not committed)
+
+Files matching `*_local` and `ssh/config` are gitignored for sensitive data:
+
+| File | Purpose |
+|------|---------|
+| `fish/config.local.fish` | API keys, tokens, passwords |
+| `ssh/config` | Server IPs, hostnames, users |
 
 ## 🔧 Customization
 
@@ -89,10 +135,7 @@ Feel free to fork and customize these dotfiles to your needs. The configs are we
 - The Neovim config includes a custom Ruby LSP wrapper to fix version mismatch errors
 - Make sure to install required dependencies for each tool
 - Configs are macOS-friendly but should work on Linux with minimal changes
-
-## 🤝 Contributing
-
-If you find issues or have suggestions, feel free to open an issue or PR!
+- Use `vim` alias for Neovim and `vi` for classic Vim
 
 ## 📄 License
 
@@ -100,5 +143,4 @@ MIT License - Feel free to use and modify as you wish.
 
 ---
 
-**Last updated:** 2026-01-29
 **Maintained by:** Marivaldo Cavalheiro
