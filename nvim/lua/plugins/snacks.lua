@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   opts = {
     picker = {
+      layout = "ivy",
       sources = {
         explorer = {
           hidden = true,
@@ -12,6 +13,10 @@ return {
               },
             },
           },
+        },
+        buffers = {
+          current = false,
+          sort_lastused = true,
         },
       },
     },
