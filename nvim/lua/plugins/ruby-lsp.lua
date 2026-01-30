@@ -1,13 +1,5 @@
 return {
   {
-    "mason-org/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "ruby-lsp",
-      },
-    },
-  },
-  {
     "mason-org/mason-lspconfig.nvim",
     opts = {
       -- Don't auto-install solargraph via Mason (use system version)

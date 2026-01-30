@@ -119,8 +119,7 @@ dotfiles/
 
 ### Starship Prompt
 - Git branch and status
-- Kubernetes context and namespace
-- GCP project
+- Kubernetes context (namespace hidden)
 - Terraform workspace
 - Docker context
 - Ruby/Node/Python versions (when in project)
@@ -129,7 +128,21 @@ dotfiles/
 ### Neovim
 - **LazyVim** distribution with custom configurations
 - **Ruby LSP** with version manager support (mise/asdf/rbenv)
-- Custom keymaps and plugins
+- **Solargraph** fallback for Ruby < 3.0 projects (via Homebrew)
+- **LazyVim Extras**: lang.markdown, editor.outline
+
+**UI Customizations:**
+- Picker with `ivy_bottom` layout (input at bottom, reversed list)
+- Cmdline at bottom (classic vim style)
+- Errors open in split with auto-focus (close with `:q`)
+- Notifications in popup (top-right)
+- Explorer shows hidden files, `o` to open, `<leader>r` to reveal current file
+- Default intro screen instead of dashboard
+
+**Keymaps:**
+- `:Q`, `:W`, `:Wq`, `:Qa` work like lowercase versions
+- `<leader>r` - reveal current file in explorer
+- `<leader>cs` - toggle code outline
 
 See [nvim/README.md](./nvim/README.md) for detailed Neovim documentation.
 
