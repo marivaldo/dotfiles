@@ -13,6 +13,9 @@ alias cl='clear'
 alias vim='nvim'
 alias vi='command vim'
 
+# Kitty sessions
+alias kdev='kitty --session ~/.config/kitty/sessions/dev.conf'
+
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :

@@ -9,6 +9,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MAPPINGS=(
   "fish:$HOME/.config/fish"
   "nvim:$HOME/.config/nvim"
+  "kitty:$HOME/.config/kitty"
   "git/gitconfig:$HOME/.gitconfig"
   "vim/vimrc:$HOME/.vimrc"
   "ssh/config:$HOME/.ssh/config"

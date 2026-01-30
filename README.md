@@ -5,6 +5,7 @@ My personal development environment configuration files.
 ## 📦 What's included
 
 - **Fish Shell**: Modern shell configuration with aliases and completions
+- **Kitty**: GPU-accelerated terminal with dev layout function
 - **Starship**: Fast, customizable prompt with git, kubernetes, gcloud info
 - **Neovim (LazyVim)**: Text editor configuration with custom LSP setup for Ruby
 - **Vim**: Classic vim configuration
@@ -60,12 +61,13 @@ touch fish/config.local.fish
 ### Symlinks Created
 
 ```
-~/.config/fish         → dotfiles/fish
-~/.config/nvim         → dotfiles/nvim
+~/.config/fish          → dotfiles/fish
+~/.config/kitty         → dotfiles/kitty
+~/.config/nvim          → dotfiles/nvim
 ~/.config/starship.toml → dotfiles/starship.toml
-~/.gitconfig           → dotfiles/git/gitconfig
-~/.vimrc               → dotfiles/vim/vimrc
-~/.ssh/config          → dotfiles/ssh/config
+~/.gitconfig            → dotfiles/git/gitconfig
+~/.vimrc                → dotfiles/vim/vimrc
+~/.ssh/config           → dotfiles/ssh/config
 ```
 
 ## 📁 Structure
@@ -79,8 +81,10 @@ dotfiles/
 ├── fish/                   # Fish shell configuration
 │   ├── config.fish         # Main config file
 │   ├── config.local.fish   # Local secrets (gitignored)
-│   ├── functions/          # Custom functions
+│   ├── functions/          # Custom functions (dev_layout, etc)
 │   └── completions/        # Shell completions
+├── kitty/                  # Kitty terminal configuration
+│   └── kitty.conf          # Main config with remote control enabled
 ├── nvim/                   # Neovim configuration (LazyVim)
 │   ├── lua/
 │   │   └── plugins/        # Custom plugin configurations
@@ -102,6 +106,12 @@ dotfiles/
 - Integration with mise for version management
 - FZF integration for fuzzy search
 - Secrets stored in `config.local.fish` (gitignored)
+- `dev_layout` function for Kitty dev environment
+
+### Kitty Terminal
+- GPU-accelerated terminal emulator
+- Remote control enabled for scripting
+- `dev_layout` command: creates 4 panes (1 large left 70%, 3 stacked right)
 
 ### Starship Prompt
 - Git branch and status
