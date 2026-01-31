@@ -1,3 +1,6 @@
+# Load functions from layouts folder (local project layouts)
+set -p fish_function_path ~/.config/fish/functions/layouts
+
 # Homebrew
 fish_add_path /opt/homebrew/bin
 
