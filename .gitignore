@@ -15,5 +15,5 @@ fish/fishd.*
 git/gitconfig.local
 ssh/config
 fish/config.local.fish
-fish/functions/dev_layout.fish
+fish/functions/*_layout.fish
 *.backup
