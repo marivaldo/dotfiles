@@ -56,6 +56,10 @@ cp ssh/config.example ssh/config
 
 # Fish secrets (create with your API keys)
 touch fish/config.local.fish
+
+# Kitty dev layout (set your project path)
+cp fish/functions/dev_layout.fish.example fish/functions/dev_layout.fish
+# Edit project_dir in the file
 ```
 
 ### Symlinks Created
@@ -163,6 +167,7 @@ Files matching `*_local` and `ssh/config` are gitignored for sensitive data:
 | File | Purpose |
 |------|---------|
 | `fish/config.local.fish` | API keys, tokens, passwords |
+| `fish/functions/dev_layout.fish` | Local dev layout with your project paths |
 | `ssh/config` | Server IPs, hostnames, users |
 
 ## 📝 Notes
