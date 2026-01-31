@@ -24,8 +24,8 @@ success_symbol = "[❯](green)"
 error_symbol = "[❯](red)"
 
 [directory]
-truncation_length = 3
-truncate_to_repo = true
+truncation_length = 0
+fish_style_pwd_dir_length = 1
 style = "blue bold"
 
 [git_branch]
