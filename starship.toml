@@ -6,10 +6,7 @@ command_timeout = 1000
 
 # Prompt format
 format = """
-$kubernetes\
-$gcloud\
 $terraform\
-$docker_context\
 $directory\
 $git_branch\
 $git_status\
@@ -59,24 +56,10 @@ style = "cyan"
 symbol = "🦀 "
 style = "red"
 
-[kubernetes]
-symbol = "⎈ "
-style = "cyan"
-disabled = false
-format = '[$symbol$context]($style) '
-
-[gcloud]
-disabled = true
-
 [terraform]
 symbol = "💠 "
 style = "purple"
 format = '[$symbol$workspace]($style) '
-
-[docker_context]
-symbol = "🐳 "
-style = "blue"
-only_with_files = false
 
 [cmd_duration]
 min_time = 2000
