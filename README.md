@@ -16,19 +16,32 @@ My personal development environment configuration files.
 ## 🚀 Quick Start
 
 ```bash
+# Install Homebrew first (if not installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Clone and install everything
 git clone git@github.com:marivaldo/dotfiles.git ~/Projects/own/dotfiles
 cd ~/Projects/own/dotfiles
 ./install.sh
-brew bundle install
 ```
+
+The install script automatically:
+1. Creates symlinks for all configs
+2. Installs Homebrew packages (fish, neovim, git, mise, starship, etc.)
+3. Installs Fisher and fish plugins
 
 ### Prerequisites
 
-- [Homebrew](https://brew.sh/)
-- [Neovim](https://neovim.io/) (>= 0.9.0)
-- [Fish Shell](https://fishshell.com/)
-- [Git](https://git-scm.com/)
-- [mise](https://mise.jdx.dev/) (or asdf/rbenv for Ruby version management)
+- [Homebrew](https://brew.sh/) - required before running install.sh
+
+### What gets installed (via Brewfile)
+
+- [Fish Shell](https://fishshell.com/) + [Starship](https://starship.rs/) prompt
+- [Neovim](https://neovim.io/) + [Vim](https://www.vim.org/)
+- [Git](https://git-scm.com/) + [GitHub CLI](https://cli.github.com/)
+- [mise](https://mise.jdx.dev/) for Ruby/Node version management
+- [Kitty](https://sw.kovidgoyal.net/kitty/) terminal
+- And many more CLI tools (see Brewfile)
 
 ### Installation
 
@@ -37,18 +50,13 @@ brew bundle install
 git clone git@github.com:marivaldo/dotfiles.git ~/Projects/own/dotfiles
 ```
 
-2. Run the installer (creates symlinks):
+2. Run the installer:
 ```bash
 ./install.sh
 ```
 Note: If configs already exist, remove them manually first or backup.
 
-3. Install all Homebrew packages:
-```bash
-brew bundle install
-```
-
-4. Copy and edit local configs (not committed):
+3. Copy and edit local configs (not committed):
 ```bash
 # SSH config
 cp ssh/config.example ssh/config
@@ -85,7 +93,7 @@ dotfiles/
 ├── fish/                   # Fish shell configuration
 │   ├── config.fish         # Main config file
 │   ├── config.local.fish   # Local secrets (gitignored)
-│   ├── conf.d/             # Auto-loaded configs (fzf, omf, etc)
+│   ├── conf.d/             # Auto-loaded configs (fzf, etc)
 │   ├── functions/          # Custom functions (dev_layout, etc)
 │   ├── completions/        # Shell completions
 │   └── fish_plugins        # Fisher plugin list
@@ -157,8 +165,8 @@ See [nvim/README.md](./nvim/README.md) for detailed Neovim documentation.
 
 ### Brewfile
 - All CLI tools and apps in one file
+- Installed automatically by `./install.sh`
 - Update with: `brew bundle dump --file=Brewfile --force`
-- Install with: `brew bundle install`
 
 ## 🔒 Local Configs (not committed)
 
