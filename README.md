@@ -73,13 +73,14 @@ cp fish/functions/dev_layout.fish.example fish/functions/dev_layout.fish
 ### Symlinks Created
 
 ```
-~/.config/fish          → dotfiles/fish
-~/.config/kitty         → dotfiles/kitty
-~/.config/nvim          → dotfiles/nvim
-~/.config/starship.toml → dotfiles/starship.toml
-~/.gitconfig            → dotfiles/git/gitconfig
-~/.vimrc                → dotfiles/vim/vimrc
-~/.ssh/config           → dotfiles/ssh/config
+~/.config/fish              → dotfiles/fish
+~/.config/kitty             → dotfiles/kitty
+~/.config/nvim              → dotfiles/nvim
+~/.config/starship.toml     → dotfiles/starship.toml
+~/.gitconfig                → dotfiles/git/gitconfig
+~/.vimrc                    → dotfiles/vim/vimrc
+~/.ssh/config               → dotfiles/ssh/config
+~/.local/bin/ruby-lsp-wrapper → dotfiles/bin/ruby-lsp-wrapper
 ```
 
 ## 📁 Structure
@@ -90,6 +91,8 @@ dotfiles/
 ├── install.sh              # Symlink installer
 ├── Brewfile                # Homebrew packages
 ├── starship.toml           # Starship prompt config
+├── bin/                    # Custom scripts
+│   └── ruby-lsp-wrapper    # Ruby LSP wrapper for mise integration
 ├── fish/                   # Fish shell configuration
 │   ├── config.fish         # Main config file
 │   ├── config.local.fish   # Local secrets (gitignored)
@@ -139,8 +142,9 @@ dotfiles/
 
 ### Neovim
 - **LazyVim** distribution with custom configurations
-- **Ruby LSP** with version manager support (mise/asdf/rbenv)
-- **Solargraph** fallback for Ruby < 3.0 projects (via Homebrew)
+- **Ruby LSP** with mise integration via custom wrapper (`bin/ruby-lsp-wrapper`)
+- **Solargraph** as automatic fallback when ruby-lsp is not available
+- **Per-project LSP**: automatically detects which LSP to use for each Ruby project
 - **LazyVim Extras**: lang.markdown, editor.outline
 
 **UI Customizations:**
@@ -180,7 +184,8 @@ Files matching `*_local` and `ssh/config` are gitignored for sensitive data:
 
 ## 📝 Notes
 
-- The Neovim config includes a custom Ruby LSP wrapper to fix version mismatch errors
+- The `ruby-lsp-wrapper` script ensures ruby-lsp uses the correct Ruby version per project via mise
+- Neovim automatically chooses between ruby-lsp and solargraph based on project availability
 - Make sure to install required dependencies for each tool
 - Configs are macOS-friendly but should work on Linux with minimal changes
 - Use `vim` alias for Neovim and `vi` for classic Vim

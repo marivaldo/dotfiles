@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Ruby LSP Wrapper for Neovim
+# Uses mise to execute ruby-lsp with the correct Ruby version for the project
+#
+# Usage: ruby-lsp-wrapper [project_dir]
+
+# First argument is the project directory (passed by Neovim)
+PROJECT_DIR="${1:-$PWD}"
+
+# Find project root (directory with Gemfile) if not passed or invalid
+if [[ ! -f "$PROJECT_DIR/Gemfile" ]]; then
+  dir="$PROJECT_DIR"
+  while [[ "$dir" != "/" ]]; do
+    if [[ -f "$dir/Gemfile" ]]; then
+      PROJECT_DIR="$dir"
+      break
+    fi
+    dir=$(dirname "$dir")
+  done
+fi
+
+if [[ ! -f "$PROJECT_DIR/Gemfile" ]]; then
+  echo "[ruby-lsp-wrapper] ERROR: No Gemfile found" >&2
+  exit 1
+fi
+
+# Execute ruby-lsp through mise with explicit directory
+exec mise -C "$PROJECT_DIR" exec -- ruby-lsp

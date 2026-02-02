@@ -5,15 +5,6 @@ return {
       enabled = true,
       top_down = true,
     },
-    input = {
-      win = {
-        relative = "editor",
-        row = -1,
-        col = 0,
-        width = 0,
-        border = "top",
-      },
-    },
     picker = {
       layouts = {
         ivy_bottom = {

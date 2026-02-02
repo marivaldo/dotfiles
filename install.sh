@@ -18,6 +18,7 @@ MAPPINGS=(
   "vim/vimrc:$HOME/.vimrc"
   "ssh/config:$HOME/.ssh/config"
   "starship.toml:$HOME/.config/starship.toml"
+  "bin/ruby-lsp-wrapper:$HOME/.local/bin/ruby-lsp-wrapper"
 )
 
 for mapping in "${MAPPINGS[@]}"; do
