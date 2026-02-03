@@ -36,6 +36,8 @@ return {
           },
         },
         files = {
+          hidden = true,
+          ignored = true,
           layout = "ivy_bottom",
         },
         buffers = {
