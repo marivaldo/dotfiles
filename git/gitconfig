@@ -1,6 +1,6 @@
 [user]
-  name = Marivaldo Cavalheiro
-  email = marivaldo@gmail.com
+	name = Marivaldo Cavalheiro
+	email = marivaldo@gmail.com
 	signingkey = /Users/marivaldocavalheiro/.ssh/id_ed25519_signing_commit.pub
 [core]
   editor = vim
