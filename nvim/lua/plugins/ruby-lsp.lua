@@ -10,18 +10,19 @@ local function find_project_root(start_dir)
   return nil
 end
 
-local projects_started = {}
+-- Cache of which LSP each project uses, plus buffers waiting on the initial check.
+local project_lsp = {} -- project_root -> "ruby_lsp" | "solargraph"
+local pending = {} -- project_root -> { bufnr, ... }
 
--- Start the appropriate LSP for a project
-local function start_ruby_lsp(project_root)
+local function start_ruby_lsp(project_root, bufnr)
   vim.lsp.start({
     name = "ruby_lsp",
     cmd = { vim.fn.expand("~/.local/bin/ruby-lsp-wrapper"), project_root },
     root_dir = project_root,
-  })
+  }, { bufnr = bufnr })
 end
 
-local function start_solargraph(project_root)
+local function start_solargraph(project_root, bufnr)
   vim.lsp.start({
     name = "solargraph",
     cmd = { "solargraph", "stdio" },
@@ -36,7 +37,15 @@ local function start_solargraph(project_root)
         symbols = true,
       },
     },
-  })
+  }, { bufnr = bufnr })
+end
+
+local function attach(project_root, bufnr)
+  if project_lsp[project_root] == "ruby_lsp" then
+    start_ruby_lsp(project_root, bufnr)
+  elseif project_lsp[project_root] == "solargraph" then
+    start_solargraph(project_root, bufnr)
+  end
 end
 
 return {
@@ -68,22 +77,32 @@ return {
             return
           end
 
-          if projects_started[project_root] then
+          -- Decision already cached: attach this buffer immediately.
+          if project_lsp[project_root] then
+            attach(project_root, args.buf)
             return
           end
-          projects_started[project_root] = true
 
-          -- Quick async check if ruby-lsp is available for this project
+          -- Decision in-flight: queue this buffer and let the running check attach it.
+          if pending[project_root] then
+            table.insert(pending[project_root], args.buf)
+            return
+          end
+
+          -- First buffer in this project: run the check, then attach all queued buffers.
+          pending[project_root] = { args.buf }
           vim.system(
             { "mise", "-C", project_root, "which", "ruby-lsp" },
             { text = true },
             function(result)
               vim.schedule(function()
-                if result.code == 0 then
-                  start_ruby_lsp(project_root)
-                else
-                  start_solargraph(project_root)
+                project_lsp[project_root] = result.code == 0 and "ruby_lsp" or "solargraph"
+                for _, buf in ipairs(pending[project_root]) do
+                  if vim.api.nvim_buf_is_valid(buf) then
+                    attach(project_root, buf)
+                  end
                 end
+                pending[project_root] = nil
               end)
             end
           )
